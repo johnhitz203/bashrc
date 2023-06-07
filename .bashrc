@@ -123,6 +123,7 @@ if ! shopt -oq posix; then
 fi
 
 # asdf
+## Add asdf to path
 . "$HOME/.asdf/asdf.sh"
 
 # Edit prompt to add git branch
