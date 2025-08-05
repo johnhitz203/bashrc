@@ -144,15 +144,9 @@ echo "export PATH=\$PATH:$(python3 -m site --user-base)/bin"
 export FLYCTL_INSTALL="/home/johnhitz/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
-# Excersism cli
-echo 'export PATH=~/bin:$PATH' >> ~/.bashrc
-
-export PATH=~/bin:$PATH
-
 # Set up direnv
 eval "$(direnv hook bash)"
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
-export PATH=~/bin:$PATH
 
 # Setting bash color scheme
 export LS_COLORS='di=00;38;5;245:fi=00;38;5;240:ln=00;38;5;240:so=00;38;5;248:bd=48;5;24;38;5;248:cd=48;5;24;38;5;248:or=48;5;244;38;5;248:ex=00;38;5;240:*.cmd=00;38;5;240:*.exe=00;38;5;240:*.com=00;38;5;240:*.zip=00;38;5;240:*.tar=00;38;5;240:*.gz=00;38;5;240:*.bz2=00;38;5;240:*.7z=00;38;5;240'
@@ -161,3 +155,9 @@ export LS_COLORS='di=00;38;5;245:fi=00;38;5;240:ln=00;38;5;240:so=00;38;5;248:bd
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
   export PATH="$HOME/bin:$PATH"
 fi
+
+# Add ~/bin to PATH if not already present
+case ":$PATH:" in
+  *":$HOME/bin:"*) ;;
+  *) export PATH="$HOME/bin:$PATH" ;;
+esac
