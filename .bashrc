@@ -97,6 +97,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias emacs='flatpak run org.gnu.emacs'
+alias cursor='/opt/cursor.appimage'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -126,9 +127,37 @@ fi
 ## Add asdf to path
 . "$HOME/.asdf/asdf.sh"
 
+# Adding locl/bin to path
+export PATH="/usr/local/bin:$PATH"
+
 # Edit prompt to add git branch
 # git_branch() {
 #   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 # }
 
 # export PS1="[\u@\h \W]\$(git_branch)\$ "
+
+# Gigalixir cli
+echo "export PATH=\$PATH:$(python3 -m site --user-base)/bin"
+
+# fly config
+export FLYCTL_INSTALL="/home/johnhitz/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+# Excersism cli
+echo 'export PATH=~/bin:$PATH' >> ~/.bashrc
+
+export PATH=~/bin:$PATH
+
+# Set up direnv
+eval "$(direnv hook bash)"
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+export PATH=~/bin:$PATH
+
+# Setting bash color scheme
+export LS_COLORS='di=00;38;5;245:fi=00;38;5;240:ln=00;38;5;240:so=00;38;5;248:bd=48;5;24;38;5;248:cd=48;5;24;38;5;248:or=48;5;244;38;5;248:ex=00;38;5;240:*.cmd=00;38;5;240:*.exe=00;38;5;240:*.com=00;38;5;240:*.zip=00;38;5;240:*.tar=00;38;5;240:*.gz=00;38;5;240:*.bz2=00;38;5;240:*.7z=00;38;5;240'
+
+# Add user's bin directory to PATH if it's not already included
+if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+  export PATH="$HOME/bin:$PATH"
+fi
